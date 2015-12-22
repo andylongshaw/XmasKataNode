@@ -1,0 +1,1 @@
+Repo to help me learn node and JavaScript based on the XP Manchester Christmas kata 2015 
