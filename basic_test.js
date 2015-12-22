@@ -53,29 +53,24 @@ test('toddler neither naughty nor nice', function (t) {
 var children = [];
 
 function get_present_list_for(name) {
-	var present_list;
-	if (name == 'Bart')
-    {
-		children[name].present_list.small -= children[name].veg_offences;
-	}
-    else
-    {
-		children[name].present_list.small -= children[name].veg_offences/2;
-	}
+	children[name].present_list.small -= children[name].calculate_veg_offense_small_present_reduction(children[name].veg_offences);
     return children[name].present_list;
 }
 
 function add_child(name, type) {
-    var present_list;
+    children[name] = {name:name, veg_offences:0};
+
     if (name == 'Bart')
     {
-        present_list = {small:2, medium:3, large:1};
+        children[name].present_list = {small:2, medium:3, large:1};
+        children[name].calculate_veg_offense_small_present_reduction = function(offenses) { return offenses; }
     }
     else
     {
-        present_list = {small:3, medium:2, large:0};
+        children[name].present_list = {small:3, medium:2, large:0};
+        children[name].calculate_veg_offense_small_present_reduction = function(offenses) { return offenses/2; }
     }
-	children[name] = {name:name, present_list:present_list, veg_offences:0};
+
 }
 
 function child_action(name, type) {
